@@ -3,14 +3,15 @@ import React, { Component } from 'react';
 
 class App extends Component {
     constructor(props) {
+        // 如果有寫constructor就一定要搭配super
         super(props);       
-        this.handleAddClick = this.handleAddClick.bind(this);
         this.handleLessClick = this.handleLessClick.bind(this);
-        this.handleValue = this.handleValue.bind(this);
-        this.handleClear = this.handleClear.bind(this);
         this.state = { count: '' };
     }
-    handleAddClick() {
+
+    //handleAddClick = () =>{} ，這樣子的寫法稱為 Error Function
+    //直接監控component 的 this參數 ，所以就不需要多宣告bind
+    handleAddClick = () => {
         this.setState({ count: Number.parseInt(this.state.count) + 1 });
     }
     handleLessClick() {
@@ -18,10 +19,10 @@ class App extends Component {
             this.setState({ count: Number.parseInt(this.state.count) - 1 });
         }
     }
-    handleValue(e) {
+    handleValue = (e) => {
         this.setState({ count: this.state.count + e.target.value });
     }
-    handleClear(){
+    handleClear = () => {
         this.setState({ count:  this.state.count = '' });
     }
     render() {
@@ -37,12 +38,16 @@ class App extends Component {
                             <td>
                                 <ShowValue count={count}/>
                                 {/*<input type="text" size="8" value={count} /> <br />&nbsp;*/}
+                                {/*onClick= {this.handleValue()},多了() 不管有沒有觸發到onClick事件，接會執行handleValue function */}
                                 <input type="button" value="1" onClick={this.handleValue} />&nbsp;
                                 <input type="button" value="2" onClick={this.handleValue} />&nbsp;
                                 <input type="button" value="3" onClick={this.handleValue} />
                             </td>
                             <td>
                                 <input type="button" onClick={this.handleAddClick} value="+" /><br />
+                                {/*如果funciot 要傳入固定的參數，onClick function就必須多Error function handle
+                                   onClick={() => this.handleLessClick('ABC')}
+                                */}
                                 <input type="button" onClick={this.handleLessClick} value="--" />
                             </td>
                         </tr>

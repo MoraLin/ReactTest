@@ -17,7 +17,7 @@ const webpackConfig = {
         new webpack.HotModuleReplacementPlugin()
     ],
     module: {
-        //rules(webpack6) , loader(webpack5)
+        //rules(webpack2) , loader(webpack1.X)
         rules: [
             {
                 test: /\.js$/,

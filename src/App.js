@@ -12,7 +12,9 @@ class App extends Component {
     //handleAddClick = () =>{} ，這樣子的寫法稱為 Error Function
     //直接監控component 的 this參數 ，所以就不需要多宣告bind
     handleAddClick = () => {
-        this.setState({ count: Number.parseInt(this.state.count) + 1 });
+        if (this.state.count != '') {
+            this.setState({ count: Number.parseInt(this.state.count) + 1 });
+        }        
     }
     handleLessClick() {
         if (this.state.count != 0) {

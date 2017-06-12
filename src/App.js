@@ -9,7 +9,7 @@ class App extends Component {
         this.state = { count: '' };
     }
 
-    //handleAddClick = () =>{} ，這樣子的寫法稱為 Error Function
+    //handleAddClick = () =>{} ，這樣子的寫法稱為 arrow Function
     //直接監控component 的 this參數 ，所以就不需要多宣告bind
     handleAddClick = () => {
         if (this.state.count != '') {
@@ -44,10 +44,11 @@ class App extends Component {
                                 <input type="button" value="1" onClick={this.handleValue} />&nbsp;
                                 <input type="button" value="2" onClick={this.handleValue} />&nbsp;
                                 <input type="button" value="3" onClick={this.handleValue} />
+                                {/*this.handleValue.bind(this),bind會導致效能不好,因為每bind一次就會create instance*/}
                             </td>
                             <td>
                                 <input type="button" onClick={this.handleAddClick} value="+" /><br />
-                                {/*如果funciot 要傳入固定的參數，onClick function就必須多Error function handle
+                                {/*如果funciot 要傳入固定的參數，onClick function就必須多arrow function handle
                                    onClick={() => this.handleLessClick('ABC')}
                                 */}
                                 <input type="button" onClick={this.handleLessClick} value="--" />
@@ -74,3 +75,7 @@ class ShowValue extends Component {
 }
 
 module.exports = App;
+
+
+//() => {} 代表function
+//() => () 代表return function

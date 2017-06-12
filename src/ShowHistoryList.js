@@ -5,7 +5,7 @@ const ShowHistoryList = ({history, numkey}) => {
     return(       
         <div>   
             <li>
-                name:{history},key:{numkey}
+                name:{history},key:{numkey} 
             </li>
         </div>       
     )

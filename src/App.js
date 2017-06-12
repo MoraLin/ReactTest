@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import ShowValue from './ShowValue';
+import ShowHistoryList from './ShowHistoryList';
 //{Component} 等同 React.Component
 
 class App extends Component {
@@ -6,29 +8,45 @@ class App extends Component {
         // 如果有寫constructor就一定要搭配super
         super(props);       
         this.handleLessClick = this.handleLessClick.bind(this);
-        this.state = { count: '' };
+        this.state = { 
+            count: '',
+            list: []
+        };
     }
 
     //handleAddClick = () =>{} ，這樣子的寫法稱為 arrow Function
     //直接監控component 的 this參數 ，所以就不需要多宣告bind
     handleAddClick = () => {
-        if (this.state.count != '') {
+        if (this.state.count !== '') {
             this.setState({ count: Number.parseInt(this.state.count) + 1 });
         }        
     }
     handleLessClick() {
-        if (this.state.count != 0) {
+        if (this.state.count !== 0) {
             this.setState({ count: Number.parseInt(this.state.count) - 1 });
         }
     }
     handleValue = (e) => {
-        this.setState({ count: this.state.count + e.target.value });
+        const item = this.state.list;
+        item.push(e.target.value);
+        this.setState({ 
+            count: this.state.count + e.target.value,
+            list: item
+        });
     }
+
     handleClear = () => {
         this.setState({ count:  this.state.count = '' });
     }
     render() {
         const count = this.state.count;
+
+        const warpList = this.state.list.map((data, index) => {
+            const clildProps ={ 
+                data,index
+            }
+             return <ShowHistoryList  key={index}  data={data}  />
+        })
         return (
             <div>
                 <table>
@@ -53,7 +71,12 @@ class App extends Component {
                                 */}
                                 <input type="button" onClick={this.handleLessClick} value="--" />
                             </td>
-                        </tr>
+                            <td>
+                                <ul>
+                                   {warpList}
+                                </ul>
+                            </td>
+                        </tr>                       
                     </tbody>
                 </table>
             </div>
@@ -61,18 +84,18 @@ class App extends Component {
     }
 }
 
-class ShowValue extends Component {
+/*class ShowValue extends Component {
     constructor(props) {
         super(props);       
     }
-    render(){
+    render(){       
         return(
             <div>
                 <input type="text" size="8" value={this.props.count} /> &nbsp;
             </div>
         );
     }
-}
+}*/
 
 module.exports = App;
 

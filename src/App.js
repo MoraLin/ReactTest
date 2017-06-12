@@ -17,13 +17,25 @@ class App extends Component {
     //handleAddClick = () =>{} ，這樣子的寫法稱為 arrow Function
     //直接監控component 的 this參數 ，所以就不需要多宣告bind
     handleAddClick = () => {
+        const item = this.state.list;
+        const vul = Number.parseInt(this.state.count) + 1;
+        item.push(vul)
         if (this.state.count !== '') {
-            this.setState({ count: Number.parseInt(this.state.count) + 1 });
+            this.setState({ 
+                count: vul,
+                list:item
+            });
         }        
     }
     handleLessClick() {
+        const item = this.state.list;
+        const vul = Number.parseInt(this.state.count) - 1;
+        item.push(vul)
         if (this.state.count !== 0) {
-            this.setState({ count: Number.parseInt(this.state.count) - 1 });
+            this.setState({ 
+                count: vul,
+                list:item
+             });
         }
     }
     handleValue = (e) => {
@@ -42,10 +54,7 @@ class App extends Component {
         const count = this.state.count;
 
         const warpList = this.state.list.map((data, index) => {
-            const clildProps ={ 
-                data,index
-            }
-             return <ShowHistoryList  key={index}  data={data}  />
+             return <ShowHistoryList  key={index}  history={data}  numkey={index}  />
         })
         return (
             <div>

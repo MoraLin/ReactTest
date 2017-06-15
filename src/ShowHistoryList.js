@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 
 
-const ShowHistoryList = ({history,indxkey}) => {
+const ShowHistoryList = ({history, numkey}) => {
     return(       
-        <li>
-            name:{history},key:{indxkey}
-        </li>
+        <div>   
+            <li>
+                name:{history},key:{numkey} 
+            </li>
+        </div>       
     )
 }
 

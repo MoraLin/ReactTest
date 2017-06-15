@@ -7,7 +7,7 @@ class App extends Component {
     constructor(props) {
         // 如果有寫constructor就一定要搭配super
         super(props);       
-        this.handleLessClick = this.handleLessClick.bind(this);
+        this.handleClear = this.handleClear.bind(this);
         this.state = { 
             count: '',
             list: []
@@ -16,36 +16,48 @@ class App extends Component {
 
     //handleAddClick = () =>{} ，這樣子的寫法稱為 arrow Function
     //直接監控component 的 this參數 ，所以就不需要多宣告bind
-    handleAddClick = () => {
-        if (this.state.count !== '') {
-            this.setState({ count: Number.parseInt(this.state.count) + 1 });
+    handleCountClick = (e) => {
+        var calculate ='';
+        const item = this.state.list;
+
+        if (this.state.count !== '') {         
+            switch (e) {
+                case "＋":
+                    calculate = Number.parseInt(this.state.count) + 1
+                    break;
+                case "－":
+                    calculate = Number.parseInt(this.state.count) - 1
+                    break;
+                default:
+                console.log("Error");
+                    break;
+            }
+            item.push(calculate);
+            this.setState({
+                count: calculate,
+                list: item
+            });
         }        
     }
-    handleLessClick() {
-        if (this.state.count !== 0) {
-            this.setState({ count: Number.parseInt(this.state.count) - 1 });
-        }
-    }
+
     handleValue = (e) => {
         const item = this.state.list;
         item.push(e.target.value);
+
         this.setState({ 
             count: this.state.count + e.target.value,
-            list: item
+            list:  item
         });
     }
 
-    handleClear = () => {
+    handleClear () {
         this.setState({ count:  this.state.count = '' });
     }
+
     render() {
         const count = this.state.count;
-
         const warpList = this.state.list.map((data, index) => {
-            const clildProps ={ 
-                data,index
-            }
-             return <ShowHistoryList  key={index}  data={data}  />
+             return <ShowHistoryList  key={index}  history={data} indxkey={index} />
         })
         return (
             <div>
@@ -65,11 +77,11 @@ class App extends Component {
                                 {/*this.handleValue.bind(this),bind會導致效能不好,因為每bind一次就會create instance*/}
                             </td>
                             <td>
-                                <input type="button" onClick={this.handleAddClick} value="+" /><br />
+                                <input type="button" onClick={() => this.handleCountClick('＋')} value="＋" /><br />
                                 {/*如果funciot 要傳入固定的參數，onClick function就必須多arrow function handle
                                    onClick={() => this.handleLessClick('ABC')}
                                 */}
-                                <input type="button" onClick={this.handleLessClick} value="--" />
+                                <input type="button" onClick={() => this.handleCountClick('－')} value="－" />
                             </td>
                             <td>
                                 <ul>

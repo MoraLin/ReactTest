@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 
 
-const ShowHistoryList = ({data}) => {
+const ShowHistoryList = ({history,indxkey}) => {
     return(       
         <li>
-            name:{data}
+            name:{history},key:{indxkey}
         </li>
     )
 }

@@ -8,6 +8,9 @@ class App extends Component {
         // 如果有寫constructor就一定要搭配super
         super(props);       
         //this.handleLessClick = this.handleLessClick.bind(this);
+
+        this.handleClear = this.handleClear.bind(this);
+
         this.state = { 
             count: '',
             plus: '',
@@ -20,10 +23,11 @@ class App extends Component {
     handleCountClick = (e) => {
         var item = this.state.list;
         const vul = Number.parseInt(this.state.count);
+  
         //item.push(vul,e.target.value);
         this.setState({ 
                 count: vul,
-                plus: e.target.value,
+                plus: e,
                 list:item
             });    
     }
@@ -31,14 +35,14 @@ class App extends Component {
     handleValue = (e) => {   
         var item = this.state.list;
         var vul = this.state.count!='' ? this.state.count : e.target.value;
-        const plus  = this.state.plus;
-        
+        const plus  = this.state.plus; 
+
         if (plus !== '') {
             switch (plus) {
-            case '+':
+            case '＋':
                 vul = Number.parseInt(vul) + Number.parseInt(e.target.value);
                 break;
-            case '-':
+            case '－':
                 vul = Number.parseInt(vul) - Number.parseInt(e.target.value);
                 break;
             default:
@@ -59,10 +63,11 @@ class App extends Component {
             count: vul, //this.state.count + 
             plus: '',
             list: item
-        });
+        })
     }
+  
 
-    handleClear = () => {
+    handleClear  () {
         this.setState({ count:  this.state.count = '' });
     }
 
@@ -90,11 +95,12 @@ class App extends Component {
                                 {/*this.handleValue.bind(this),bind會導致效能不好,因為每bind一次就會create instance*/}
                             </td>
                             <td>
-                                <input type="button" onClick={this.handleCountClick} value="+" /><br />
+                                <input type="button" onClick={() => this.handleCountClick('＋')} value="＋" /><br />
                                 {/*如果funciot 要傳入固定的參數，onClick function就必須多arrow function handle
                                    onClick={() => this.handleLessClick('ABC')}
                                 */}
-                                <input type="button" onClick={this.handleCountClick} value="-" />
+                                <input type="button" onClick={() => this.handleCountClick('－')} value="－" />
+
                             </td>
                             <td>
                                 <ul>
@@ -107,20 +113,8 @@ class App extends Component {
             </div>
         )
     }
-}
 
-/*class ShowValue extends Component {
-    constructor(props) {
-        super(props);       
-    }
-    render(){       
-        return(
-            <div>
-                <input type="text" size="8" value={this.props.count} /> &nbsp;
-            </div>
-        );
-    }
-}*/
+}
 
 module.exports = App;
 

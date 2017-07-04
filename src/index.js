@@ -5,13 +5,13 @@ import { AppContainer } from 'react-hot-loader';
 const rootElement = document.getElementById('app');
 
 //宣告一個renderApp Function
-const renderApp = () => {
+const renderApp = (element) => {
   const App = require('./app')
   render(
     <AppContainer>
         <App />
     </AppContainer>,
-    rootElement
+    element
   );
 };
 

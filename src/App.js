@@ -66,7 +66,7 @@ class App extends Component {
         })
     }
   
-     revertData = (data,id) => {   
+     deleteData = (data,id) => {   
         var lst = data.split(',');
         var count = this.state.count;
         var list = this.state.list;
@@ -94,7 +94,7 @@ class App extends Component {
         const count = this.state.count;
         const plus  = this.state.plus;
         const warpList = this.state.list.map((data, index) => {
-             return <ShowHistoryList  key={index}  data={data} id={index} revertData={this.revertData} />
+             return <ShowHistoryList  key={index}  data={data} id={index} deleteData={this.deleteData} />
         })
         return (
             <div>

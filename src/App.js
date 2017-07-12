@@ -66,6 +66,25 @@ class App extends Component {
         })
     }
   
+     revertData = (data,id) => {   
+        var lst = data.split(',');
+        var count = this.state.count;
+        var list = this.state.list;
+
+        delete list[id];
+        console.log(lst[1]);
+        switch (lst[1]) 
+        {
+            case '＋':
+                count = Number.parseInt(count) - Number.parseInt(lst[0]) ;
+                break;        
+            case '－':
+                count = Number.parseInt(count) + Number.parseInt(lst[0]) ;
+                break;
+        }
+        
+        this.setState({ count: count, plus: '', list:  list });
+    }
 
     handleClear  () {
         this.setState({ count:  this.state.count = '' });
@@ -75,7 +94,7 @@ class App extends Component {
         const count = this.state.count;
         const plus  = this.state.plus;
         const warpList = this.state.list.map((data, index) => {
-             return <ShowHistoryList  key={index}  history={data}  numkey={index} />
+             return <ShowHistoryList  key={index}  data={data} id={index} revertData={this.revertData} />
         })
         return (
             <div>

@@ -1,20 +1,13 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class ShowHistoryList extends Component {
-
-    handelClick = (e) =>{ 
-        
-    }
-    render(){       
+const ShowHistoryList  = (props) => {  
      return(
-            <li onClick ={() =>this.handelClick(this.props.numkey)}>
-                {this.props.history} &nbsp;
+            <li  onClick={ () => props.revertData(props.data,props.id) }>                
+                {props.data}
             </li>
-        );
-    }
+        )
 }
-
-
+//onClick ={() => this.handelClick(this.props.num)}
 // const ShowHistory = ({history, numkey}) => {
 //      const filterDrinkList = list.filter((numkey) => {
 //             return data.type === 'drink';

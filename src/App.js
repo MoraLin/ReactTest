@@ -72,7 +72,7 @@ class App extends Component {
         var list = this.state.list;
 
         delete list[id];
-        console.log(lst[1]);
+        
         switch (lst[1]) 
         {
             case '＋':

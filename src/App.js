@@ -94,7 +94,7 @@ class App extends Component {
         const count = this.state.count;
         const plus  = this.state.plus;
         const warpList = this.state.list.map((data, index) => {
-             return <ShowHistoryList  key={index}  data={data} id={index} deleteData={this.deleteData} />
+             return <ShowHistoryList  key={index}  data={data} id={index}  deleteData={this.deleteData} />
         })
         return (
             <div>
